@@ -17,6 +17,9 @@
 		<java.version>17</java.version>
 		<org.mapstruct.version>1.5.3.Final</org.mapstruct.version>
 		<mapstruct-processor.version>1.5.3.Final</mapstruct-processor.version>
+		<!-- memcached -->
+		<xmemcached-provider.version>4.0.0</xmemcached-provider.version>
+		<xmemcached.version>2.4.3</xmemcached.version>
 	</properties>
 	<dependencies>
 		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-validation -->
@@ -67,6 +70,19 @@
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 			<optional>true</optional>
+		</dependency>
+
+		<!-- memcached -->
+
+		<dependency>
+			<groupId>com.google.code.simple-spring-memcached</groupId>
+			<artifactId>xmemcached-provider</artifactId>
+			<version>${xmemcached-provider.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.googlecode.xmemcached</groupId>
+			<artifactId>xmemcached</artifactId>
+			<version>${xmemcached.version}</version>
 		</dependency>
 
 		<!-- database -->

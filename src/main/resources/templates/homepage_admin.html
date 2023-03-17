@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!--/*@thymesVar id="user" type="com.example.user.domain.model.User"*/-->
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <!-- Tailwind imports -->
+  <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body>
+
+<!-- welcome user -->
+<div class="flex flex-col items-center justify-center min-h-screen py-2">
+  <div class="flex flex-col items-center justify-center w-full flex-1 px-20 text-center">
+    <h1 class="text-6xl font-bold">
+      Welcome
+      <span th:text="${user.role}">Role</span>
+      <span th:text="${user.username}">Username</span>
+      , to the Admin Page
+    </h1>
+  </div>
+</div>
+
+<!-- user detail form -->
+<form action="#" th:action="@{/profile}" th:object="${user}" method="post">
+  <div class="flex flex-col items-center justify-center min-h-screen py-2">
+    <div class="flex flex-col items-center justify-center w-full flex-1 px-20 text-center">
+      <h1 class="text-6xl font-bold">
+        User details
+      </h1>
+      <p class="mt-3 text-2xl">
+        Username:
+        <span th:text="${user.username}">Username</span>
+      </p>
+      <p class="mt-3 text-2xl">
+        Email:
+        <span th:text="${user.email}">Email</span>
+      </p>
+      <p class="mt-3 text-2xl">
+        Password:
+        <span th:text="${user.password}">Password</span>
+      </p>
+    </div>
+  </div>
+</form>
+
+</body>
+</html>
+
+

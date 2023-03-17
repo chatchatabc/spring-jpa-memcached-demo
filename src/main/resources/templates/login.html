@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<!--suppress HtmlUnknownTarget -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Login</h1>
+<form name='login' th:action="@{/authenticate}" method='post'>
+    <table>
+        <tr>
+            <td><label for="email">Email: </label></td>
+            <td><input type='text' id="email" name='email' value=''></td>
+        </tr>
+        <tr>
+            <td><label for="password">Password: </label></td>
+            <td><input type='password' id="password" name='password' /></td>
+        </tr>
+        <tr style="display: flex; flex-direction: row; justify-content: space-between">
+            <td><input name="submit" type="submit" value="submit" /></td>
+            <td><a href="/register"><input style="margin-left: 10px" type="button" value="register" /></a></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

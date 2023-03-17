@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>form</h1>
+<form th:action="@{/register-submit}" th:object="${user}" method="POST" enctype="application/x-www-form-urlencoded">
+    <div>
+        <label for="username">username</label>
+        <input id="username" th:field="*{username}"/>
+        <p th:each="error: ${#fields.hasErrors('username')}"
+           th:text="${error}">Validation error</p>
+    </div>
+    <div>
+        <label for="email">email</label>
+        <input id="email" type="email" th:field="*{email}"/>
+        <p th:each="error : ${#fields.hasErrors('email')}"
+           th:text="${error}">Validation error</p>
+    </div>
+    <div>
+        <label for="password">password</label>
+        <input id="password" type="password" th:field="*{password}"/>
+        <p th:each="error : ${#fields.hasErrors('password')}"
+           th:text="${error}">Validation error</p>
+    </div>
+    <div>
+        <label for="match">confirm</label>
+        <input id="match" type="password" th:field="*{matchingPassword}"/>
+    </div>
+    <div>
+        <label for="role">Role</label>
+        <select id="role" name="role">
+            <option value="USER">User</option>
+            <option value="ADMIN">Admin</option>
+        </select>
+    </div>
+    <button type="submit">submit</button>
+</form>
+
+<a href="/">login</a>
+</body>
+</html>

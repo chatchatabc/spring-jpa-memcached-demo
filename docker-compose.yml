@@ -6,4 +6,11 @@ services:
       - POSTGRES_PASSWORD=123456
       - POSTGRES_DB=spring_jpa_memcached
     ports:
-      - 5432:5432
+      - "5432:5432"
+  memcached:
+    image: memcached:1.6.19
+    environment:
+      - MEMCACHED_CACHE_SIZE=64
+      - MEMCACHED_MAX_CONNECTIONS=1024
+    ports:
+      - "11211:11211"

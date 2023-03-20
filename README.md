@@ -2,6 +2,10 @@
 
 Basic demo focused solely on the features and usage of memcached with spring boot 3, spring security 6, and jpa.
 
+# Database Diagram
+
+- Under development
+
 # Requirements
 
 - [Docker](https://docs.docker.com/get-docker/)
@@ -14,7 +18,7 @@ Basic demo focused solely on the features and usage of memcached with spring boo
 
 # Features
 
-* Under construction
+* Under development
 
 # Tools
 
@@ -27,11 +31,25 @@ Basic demo focused solely on the features and usage of memcached with spring boo
 
 # Getting Started
 
-- Under construction
+1. Download and install Docker, Postgresql, Java with their appropriate versions.
+2. Open the application then enter the command at terminal/shell
+   ```sh
+       docker-compose up
+   ```
+3. check application.properties in the `/src/main/resources` and configure the database connection
+    ```  
+       spring.jpa.hibernate.ddl-auto=create
+       spring.jpa.show-sql=false
+       spring.datasource.url=jdbc:postgresql://localhost:<port>/<db-name>
+       spring.datasource.username=<username>
+       spring.datasource.password=<password>
+       spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
+    ```
+4. Build then run the application (Automatically creates table needed to store data if it does not exist)
 
 # Issues
 
-- none as of the moment
+- under development, not yet tested
 
 # References
 - [How to set up Thymeleaf](https://www.baeldung.com/thymeleaf-in-spring-mvc)

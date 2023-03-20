@@ -43,7 +43,7 @@ public class UserController {
             if(userVO.getEmail().isEmpty() || userVO.getPassword().isEmpty() ){
                 return "login";
             }
-            User authUser = userService.processUser(userVO.getEmail(), userVO.getPassword());
+            User authUser = userService.processUserLogin(userVO.getEmail(), userVO.getPassword());
             if (authUser.getRole().equals("ADMIN")){
                 redirectAttributes.addFlashAttribute("user", authUser);
                 return "redirect:/admin/homepage";

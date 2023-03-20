@@ -10,6 +10,6 @@ public interface UserService extends UserDetailsService {
 
     User registerNewUserAccount(User user) throws UserAlreadyExistAuthenticationException, ServerException;
 
-    User processUser(String email, String password);
+    User processUserLogin(String email, String password);
 
 }

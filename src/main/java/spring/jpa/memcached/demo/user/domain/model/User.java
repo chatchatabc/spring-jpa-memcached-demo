@@ -57,9 +57,13 @@ public class User implements UserDetails {
     @Column(name = "last_login", nullable = false)
     private LocalDate lastLogin;
 
+    @Transient
     private Boolean isAccountNonExpired;
+    @Transient
     private Boolean isAccountNonLocked;
+    @Transient
     private Boolean isEnabled;
+    @Transient
     private Boolean isCredentialsNonExpired;
 
 

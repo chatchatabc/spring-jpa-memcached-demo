@@ -18,8 +18,7 @@
 		<org.mapstruct.version>1.5.3.Final</org.mapstruct.version>
 		<mapstruct-processor.version>1.5.3.Final</mapstruct-processor.version>
 		<!-- memcached -->
-		<xmemcached-provider.version>4.0.0</xmemcached-provider.version>
-		<xmemcached.version>2.4.3</xmemcached.version>
+		<spymemcached.version>2.12.3</spymemcached.version>
 	</properties>
 	<dependencies>
 		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-validation -->
@@ -74,16 +73,13 @@
 
 		<!-- memcached -->
 
+		<!-- https://mvnrepository.com/artifact/net.spy/spymemcached -->
 		<dependency>
-			<groupId>com.google.code.simple-spring-memcached</groupId>
-			<artifactId>xmemcached-provider</artifactId>
-			<version>${xmemcached-provider.version}</version>
+			<groupId>net.spy</groupId>
+			<artifactId>spymemcached</artifactId>
+			<version>2.12.3</version>
 		</dependency>
-		<dependency>
-			<groupId>com.googlecode.xmemcached</groupId>
-			<artifactId>xmemcached</artifactId>
-			<version>${xmemcached.version}</version>
-		</dependency>
+
 
 		<!-- database -->
 		<dependency>

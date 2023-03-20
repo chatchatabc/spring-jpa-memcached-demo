@@ -32,7 +32,7 @@ public class UserServiceImpl implements UserService {
         this.userValidations = userValidations;
     }
 
-    public User processUser(String email, String password) throws UsernameNotFoundException {
+    public User processUserLogin(String email, String password) throws UsernameNotFoundException {
         User user = this.loadUserByUsername(email);
 
         if (user == null) {

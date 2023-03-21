@@ -1,6 +1,9 @@
 package spring.jpa.memcached.demo.user.impl.service;
 
 import jakarta.transaction.Transactional;
+import net.spy.memcached.AddrUtil;
+import net.spy.memcached.ConnectionFactoryBuilder;
+import net.spy.memcached.MemcachedClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -11,6 +14,7 @@ import spring.jpa.memcached.demo.user.domain.repository.UserRepository;
 import spring.jpa.memcached.demo.user.domain.service.UserService;
 import spring.jpa.memcached.demo.user.domain.specification.UserValidations;
 
+import java.io.IOException;
 import java.rmi.ServerException;
 
 @Service
@@ -24,9 +28,13 @@ public class UserServiceImpl implements UserService {
 
     final PasswordEncoder passwordEncoder;
 
+    MemcachedClient memcachedClient = new MemcachedClient(new ConnectionFactoryBuilder()
+            .setProtocol(ConnectionFactoryBuilder.Protocol.BINARY)
+            .build(), AddrUtil.getAddresses("localhost:11211"));
+
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepository, UserValidations userValidations, PasswordEncoder passwordEncoder){
+    public UserServiceImpl(UserRepository userRepository, UserValidations userValidations, PasswordEncoder passwordEncoder) throws IOException {
         this.passwordEncoder = passwordEncoder;
         this.userRepository = userRepository;
         this.userValidations = userValidations;
@@ -43,6 +51,10 @@ public class UserServiceImpl implements UserService {
             throw new UsernameNotFoundException("Wrong Password");
         }
 
+
+
+        memcachedClient.add(user.getEmail(), 3600, user);
+        System.out.println(memcachedClient.asyncGet(user.getEmail()));
         return user;
     }
 
@@ -63,7 +75,7 @@ public class UserServiceImpl implements UserService {
         User user = userRepository.findByEmail(username);
         user.setIsEnabled(true);
         user.setIsAccountNonLocked(true);
-        user.setIsCredentialsNonExpired(true);
+        user.setIsAccountNonExpired(true);
         user.setIsCredentialsNonExpired(true);
         user.getAuthorities();
 

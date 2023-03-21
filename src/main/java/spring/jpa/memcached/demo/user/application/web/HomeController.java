@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class HomeController {
 
-    @Secured("ROLE_USER")
-    @GetMapping("/homepage")
+    @Secured({"ROLE_USER", "ROLE_ADMIN"})
+    @GetMapping("/user/homepage")
     public String login(){
         return "homepage";
     }

@@ -15,7 +15,6 @@ import spring.jpa.memcached.demo.user.domain.service.UserService;
 import spring.jpa.memcached.demo.user.domain.specification.UserValidations;
 
 import java.io.IOException;
-import java.rmi.ServerException;
 
 @Service
 @Transactional
@@ -47,21 +46,19 @@ public class UserServiceImpl implements UserService {
             throw new UsernameNotFoundException("User does not exist");
         }
 
-        if(!passwordEncoder.matches(password, user.getPassword())){
+        if (!passwordEncoder.matches(password, user.getPassword())) {
             throw new UsernameNotFoundException("Wrong Password");
         }
 
 
-
         memcachedClient.add(user.getEmail(), 3600, user);
-        System.out.println(memcachedClient.asyncGet(user.getEmail()));
+        System.out.println(memcachedClient.get(user.getEmail()));
         return user;
     }
 
-    public User registerNewUserAccount(User user) throws UserAlreadyExistAuthenticationException, ServerException {
+    public User registerNewUserAccount(User user) throws UserAlreadyExistAuthenticationException {
         if (userValidations.emailExists(user.getEmail())) {
-            throw new UserAlreadyExistAuthenticationException("There is an account with that email address: "
-                    + user.getEmail());
+            throw new UserAlreadyExistAuthenticationException("There is an account with that email address: " + user.getEmail());
         }
 
         user.setPassword(passwordEncoder.encode(user.getPassword()));
@@ -72,7 +69,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User loadUserByUsername(String username) throws UsernameNotFoundException {
+        System.out.println(username);
         User user = userRepository.findByEmail(username);
+        System.out.println(user);
         user.setIsEnabled(true);
         user.setIsAccountNonLocked(true);
         user.setIsAccountNonExpired(true);

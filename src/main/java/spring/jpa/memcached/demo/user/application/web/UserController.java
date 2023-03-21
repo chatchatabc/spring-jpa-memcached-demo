@@ -72,7 +72,13 @@ public class UserController {
             if(!userVO.getPassword().equals(userVO.getMatchingPassword())){
                 throw new Exception("Passwords do not match");
             }
-            User user = UserMapper.INSTANCE.voToModel(userVO);
+
+            User user = new User();
+            user.setUsername( userVO.getUsername());
+            user.setPassword( userVO.getPassword());
+            user.setEmail( userVO.getEmail());
+            user.setRole( userVO.getRole());
+
             User result = userService.registerNewUserAccount(user);
             if (result.getRole().equals("ADMIN")){
                 redirectAttributes.addFlashAttribute("user", result);
@@ -84,6 +90,7 @@ public class UserController {
             }
             return "registration";
         } catch (Exception e) {
+            System.out.println(e.getMessage());
             return "error";
         }
     }
